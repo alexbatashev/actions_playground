@@ -1,0 +1,17 @@
+name: Test WF
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    if: ${{github.event_name == 'pull_request'}}
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "lint"
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "build"
