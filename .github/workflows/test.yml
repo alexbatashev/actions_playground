@@ -11,7 +11,7 @@ jobs:
     steps:
     - run: echo "lint"
   build:
-    needs: lint
+    needs: ${{ github.event.name == 'pull_request' ? [lint] : []}}
     runs-on: ubuntu-latest
     if: ${{ github.event.name == 'push' || needs.lint.result == 'success' }}
     steps:
