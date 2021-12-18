@@ -3,8 +3,8 @@ description: 'Cleanup work directory upon job finish'
 
 
 runs:
-  post: 'cleanup.sh'
   using: "composite"
+  post: 'cleanup.sh'
   steps:
   - run: echo "Cleanup setup"
     shell: bash
