@@ -5,14 +5,8 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    if: ${{github.event_name == 'pull_request'}}
+  test:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "lint"
-  build:
-    needs: ${{ github.event.name == 'pull_request' ? [lint] : []}}
-    runs-on: ubuntu-latest
-    if: ${{ github.event.name == 'push' || needs.lint.result == 'success' }}
-    steps:
-    - run: echo "build"
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/cleanup
