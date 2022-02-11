@@ -9,15 +9,20 @@ module.exports = ({ core, process }) => {
 
 			const ltsConfigs = inputs.lts_config.split(';');
 
+      console.log(inputs);
+      console.log(ltsConfigs);
+
 			const enabledLTSConfigs = [];
 
 			testConfigs.lts.forEach(v => {
+        console.log(v);
 				if (ltsConfigs.includes(v.config)) {
 					enabledLTSConfigs.concat(v);
 				}
 			});
 
 			let ltsString = JSON.stringify(enabledLTSConfigs);
+      console.log(ltsString);
 
 			for (let [key, value] of Object.entries(inputs)) {
 				ltsString = ltsString.replaceAll("${{ inputs." + key + " }}", value);
