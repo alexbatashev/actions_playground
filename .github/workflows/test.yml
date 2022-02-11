@@ -5,8 +5,7 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    if: ${{github.event_name == 'pull_request'}}
+  test:
     runs-on: ubuntu-latest
     steps:
     - run: echo "lint"
