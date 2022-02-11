@@ -31,7 +31,7 @@ jobs:
     - run: echo "${{ needs.resolve_matrix.outputs.lts }}"
 
   test:
-    name: ${{ matrix.name }}
+    name: ${{ matrix.name || "LLVM Test Suite" }}
     needs: [resolve_matrix]
     runs-on: ubuntu-latest
     if: false
