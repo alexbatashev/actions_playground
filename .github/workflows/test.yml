@@ -21,6 +21,14 @@ jobs:
           const script = require('./generate_test_matrix.js');
           script({core, process});
 
+
+  debug:
+    name: Debug
+    needs: [resolve_matrix]
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "${{ needs.resolve_matrix.outputs.lts }}"
+
   test:
     name: ${{ matrix.name }}
     needs: [resolve_matrix]
