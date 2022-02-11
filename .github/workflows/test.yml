@@ -5,12 +5,6 @@ on:
   pull_request:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.name == 'push' || needs.lint.result == 'success' }}
-    steps:
-    - run: echo "build"
-
   resolve_matrix:
     runs-on: ubuntu-latest
     outputs:
@@ -61,4 +55,4 @@ jobs:
       matrix:
         include: ${{ needs.resolve_matrix.outputs.lts }}
     steps:
-    - runs: echo "1"
+    - run: echo "1"
