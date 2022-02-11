@@ -15,7 +15,7 @@ jobs:
         wget raw.githubusercontent.com/alexbatashev/actions_playground/${{ github.sha }}/devops/scripts/generate_test_matrix.js
     - uses: actions/github-script@v6
       env:
-        GHA_INPUT: '{"lts_config":"l0_gen9;ocl_x64"}'
+        GHA_INPUTS: '{"lts_config":"l0_gen9;ocl_x64"}'
       with:
         script: |
           const script = require('./generate_test_matrix.js');
