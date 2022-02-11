@@ -16,3 +16,55 @@ jobs:
     if: ${{ github.event.name == 'push' || needs.lint.result == 'success' }}
     steps:
     - run: echo "build"
+
+  resolve_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      lts: ${{ steps.work.outputs.lts }}
+    steps:
+    - run: |
+        wget raw.githubusercontent.com/alexbatashev/actions_playground/${{ github.sha }}/devops/test_configs.json
+    - uses: actions/github-script@v6
+      env:
+        GHA_INPUT: ${{ toJSON(inputs) }}
+      with:
+        script: |
+          const fs = require('fs');
+          fs.readFile('./test_configs.json', 'utf8', (err, data) => {
+            if (err) {
+              console.log(`Error reading file from disk: ${err}`);
+            } else {
+              const testConfigs = JSON.parse(data);
+              const inputs = JSON.parse(process.env.GHA_INPUTS);
+
+              const ltsConfigs = inputs.lts_config.split(';');
+
+              const enabledLTSConfigs = [];
+
+              testConfigs.lst.forEach(v => {
+                if (ltsConfigs.includes(v.config)) {
+                  enabledLTSConfig.concat(v);
+                }
+              });
+
+              let ltsString = JSON.stringify(enabledLTSConfigs);
+
+              for (let [key, value] of Object.entries(inputs)) {
+                ltsString = ltsString.replaceAll('${{ inputs.' + key + ' }}', value);
+              }
+
+              core.setOutput('lts', ltsString);
+            }
+
+          });
+
+
+  test:
+    name: Run Tests
+    needs: [resolve_matrix]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include: ${{ needs.resolve_matrix.outputs.lts }}
+    steps:
+    - runs: echo "1"
