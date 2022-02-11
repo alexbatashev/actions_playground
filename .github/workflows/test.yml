@@ -27,6 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include: ${{ needs.resolve_matrix.outputs.lts }}
+        include: ${{ fromJSON(needs.resolve_matrix.outputs.lts) }}
     steps:
     - run: echo "1"
