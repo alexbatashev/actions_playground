@@ -13,7 +13,7 @@ module.exports = ({ core, process }) => {
 
 			testConfigs.lts.forEach(v => {
 				if (ltsConfigs.includes(v.config)) {
-					enabledLTSConfig.concat(v);
+					enabledLTSConfigs.concat(v);
 				}
 			});
 
