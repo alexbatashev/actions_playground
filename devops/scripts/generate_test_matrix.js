@@ -11,7 +11,7 @@ module.exports = ({ core, process }) => {
 
 			const enabledLTSConfigs = [];
 
-			testConfigs.lst.forEach(v => {
+			testConfigs.lts.forEach(v => {
 				if (ltsConfigs.includes(v.config)) {
 					enabledLTSConfig.concat(v);
 				}
