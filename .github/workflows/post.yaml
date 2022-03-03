@@ -1,0 +1,12 @@
+name: Post
+
+on:
+  workflow_run:
+    workflows: [Test WF]
+    types: [completed]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo 1
