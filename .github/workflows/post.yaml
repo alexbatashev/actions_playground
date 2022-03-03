@@ -8,4 +8,5 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    run: echo 1
+    steps:
+    - run: echo 1
