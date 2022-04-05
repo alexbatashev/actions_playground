@@ -1,0 +1,46 @@
+name: Manual run
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_ref:
+        description: 'Build ref'
+        type: string
+        required: false
+        default: 'sycl'
+      lts_ref:
+        description: 'LLVM Test Suite ref'
+        type: string
+        required: false
+        default: 'intel'
+      build_image:
+        description: 'Build image'
+        type: string
+        required: false
+        default: "ghcr.io/intel/llvm/ubuntu2004_build:latest"
+      lts_config:
+        description: 'LLVM Test Suite config'
+        type: string
+        required: false
+        default: "hip_amdgpu;ocl_x64;ocl_gen9;l0_gen9;esimd_emu"
+      intel_drivers_image:
+        description: 'Intel Drivers image'
+        type: string
+        required: false
+        default: "ghcr.io/intel/llvm/ubuntu2004_intel_drivers:latest"
+      amdgpu_image:
+        description: 'AMDGPU image'
+        type: string
+        required: false
+        default: "ghcr.io/intel/llvm/ubuntu2004_build:latest"
+      lts_linux_cmake_extra_args:
+        description: 'LLVM Test Suite Linux CMake args'
+        type: string
+        required: false
+        default: ""
+
+jobs:
+    test:
+     runs-on: ubuntu-latest
+     steps:
+      - run: echo 1
